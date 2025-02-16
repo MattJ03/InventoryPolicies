@@ -9,6 +9,7 @@ use App\Models\User;
 use Spatie\Permission\Models\Permission;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
