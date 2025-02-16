@@ -50,6 +50,20 @@ class ProductController extends Controller
 
     public function edit(Product $product) {
         $this->authorize('edit', $product);
+        $product = Product::findOrFail($product);
+        return view('products.edit');
 
+    }
+
+    public function update(Request $request, Product $product) {
+        $this->authorize('update', $product);
+        $validatedData = $request->validate([
+            'name' => 'required|max:100',
+            'quantity' => 'required|numeric|min:1|max:1000',
+            'price' => 'required|numeric|min:1|max:1000',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+        $product->update($validatedData);
+        return redirect()->route('products.index');
     }
 }
