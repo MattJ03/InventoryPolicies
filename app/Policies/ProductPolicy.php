@@ -38,7 +38,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-     return $user->id === $product->user_id || $user->hasPermissionTo('edit products');
+     return $user->id === $product->user_id || $user->hasPermissionTo('edit product');
     }
 
     /**
@@ -46,7 +46,7 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return $user->id === $product->user_id || $user->hasPermissionTo('delete products');
+        return $user->id === $product->user_id || $user->hasPermissionTo('delete product');
     }
 
     /**
