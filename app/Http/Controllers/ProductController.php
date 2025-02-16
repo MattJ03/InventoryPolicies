@@ -66,4 +66,10 @@ class ProductController extends Controller
         $product->update($validatedData);
         return redirect()->route('products.index');
     }
+
+    public function destroy(Product $product) {
+        $this->authorize('delete', $product);
+        $product->delete();
+        return redirect()->route('products.index');
+    }
 }
