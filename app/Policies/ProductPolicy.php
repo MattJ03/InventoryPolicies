@@ -49,13 +49,6 @@ class ProductPolicy
         return $user->id === $product->user_id || $user->hasPermissionTo('delete product');
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
 
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
 
 }
