@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Spatie\Permission\Models\Role;
 
 class ProductPolicy
 {
@@ -13,7 +14,7 @@ class ProductPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +22,7 @@ class ProductPolicy
      */
     public function view(User $user, Product $product): bool
     {
-        //
+        return $user->can('view product');
     }
 
     /**
@@ -37,7 +38,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-
+     return $user->id === $product->user_id || $user->hasPermissionTo('edit products');
     }
 
     /**
@@ -45,22 +46,16 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        //
+        return $user->id === $product->user_id || $user->hasPermissionTo('delete products');
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Product $product): bool
-    {
-        //
-    }
+
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Product $product): bool
-    {
-        //
-    }
+
 }
