@@ -21,22 +21,25 @@ class DatabaseSeeder extends Seeder
     $userRole = Role::create(['name' => 'user']);
 
     Permission::create(['name' => 'create product']);
-    Permission::create(['name' => 'edit product', ])
+    Permission::create(['name' => 'edit product',]);
+    Permission::create(['name' => 'delete product']);
+    Permission::create(['name' => 'update product']);
+    Permission::create(['name' => 'show product']);
 
-    $adminRole->givePermissionTo(['create product', 'edit product', 'delete product', 'update product', 'view product']);
-    $userRole->givePermissionTo(['create product', 'view product']);
+    $adminRole->givePermissionTo(['create product', 'edit product', 'delete product', 'update product', 'show product']);
+    $userRole->givePermissionTo(['create product', 'show product']);
 
     $user = User::create([
         'name' => 'Matt',
         'email' => 'matt@gmail.com',
-        'password' => bcrypt('password'),
+        'password' => Hash::make('password'),
     ]);
     $user->assignRole('admin');
 
     $admin = User::create([
         'name' => 'admin',
         'email' => 'admin@admin.com',
-        'password', bcrypt('password')
+        'password' => Hash::make('password'),
     ]);
     $admin->assignRole('admin');
 
@@ -50,7 +53,7 @@ class DatabaseSeeder extends Seeder
         'quantity' => 100,
         'price' => 1500,
         'category_id' => $category->id,
-        'user_id' => $userRole->id,
+        'user_id' => $user->id,
     ]);
     }
 }
